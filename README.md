@@ -92,6 +92,9 @@ def rbas = new RoleBasedAuthorizationStrategy()
 Set<Permission> permissions = new HashSet<>();
 def groups = new ArrayList<>(PermissionGroup.getAll());
 groups.remove(PermissionGroup.get(Permission.class));
+for (group in groups) {
+  permissions.addAll(group.getPermissions());
+}
 Role adminRole = new Role("admin",permissions)
 
 /* assign admin role to admin user */
